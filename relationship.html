@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relationship Satisfaction Survey</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff4f4;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .back-button {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            font-size: 16px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            background: #ff4d6d;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(255, 77, 109, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #ff3557;
+            transform: scale(1.05);
+        }
+
+        .survey-container {
+            max-width: 600px;
+            margin: 60px auto 20px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.1);
+        }
+
+        h1 {
+            color: #ff4d6d;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            background: #fff8f8;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(255, 77, 109, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.15);
+            background: #fff6f6;
+        }
+
+        .question p {
+            color: #ff4d6d;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        input[type="radio"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff4d6d;
+            border-radius: 50%;
+            margin: 0;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        input[type="radio"]:checked {
+            background-color: #ff4d6d;
+            border-color: #ff4d6d;
+        }
+
+        input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        label {
+            color: #666;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #ff3557;
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            .survey-container {
+                padding: 20px;
+                margin: 50px auto 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .question {
+                padding: 15px;
+            }
+
+            .options {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button onclick="location.href='surveys.html'" class="back-button">← Back</button>
+
+    <div class="survey-container">
+        <h1>Relationship Satisfaction Survey</h1>
+        
+        <form id="relationshipSurvey">
+            <div class="question">
+                <p>How satisfied are you with your current relationships?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q1-1" name="satisfaction" value="1">
+                        <label for="q1-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q1-2" name="satisfaction" value="2">
+                        <label for="q1-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q1-3" name="satisfaction" value="3">
+                        <label for="q1-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q1-4" name="satisfaction" value="4">
+                        <label for="q1-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q1-5" name="satisfaction" value="5">
+                        <label for="q1-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Do you feel emotionally supported?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q2-1" name="emotional_support" value="1">
+                        <label for="q2-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q2-2" name="emotional_support" value="2">
+                        <label for="q2-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q2-3" name="emotional_support" value="3">
+                        <label for="q2-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q2-4" name="emotional_support" value="4">
+                        <label for="q2-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q2-5" name="emotional_support" value="5">
+                        <label for="q2-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Do you feel comfortable sharing your true thoughts and feelings with your partner?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q3-1" name="appreciation" value="1">
+                        <label for="q3-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q3-2" name="appreciation" value="2">
+                        <label for="q3-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q3-3" name="appreciation" value="3">
+                        <label for="q3-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q3-4" name="appreciation" value="4">
+                        <label for="q3-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q3-5" name="appreciation" value="5">
+                        <label for="q3-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>How well do you handle conflicts in your relationships?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q4-1" name="conflict_handling" value="1">
+                        <label for="q4-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q4-2" name="conflict_handling" value="2">
+                        <label for="q4-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q4-3" name="conflict_handling" value="3">
+                        <label for="q4-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q4-4" name="conflict_handling" value="4">
+                        <label for="q4-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q4-5" name="conflict_handling" value="5">
+                        <label for="q4-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Do you feel valued in your relationships?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q5-1" name="feeling_valued" value="1">
+                        <label for="q5-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q5-2" name="feeling_valued" value="2">
+                        <label for="q5-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q5-3" name="feeling_valued" value="3">
+                        <label for="q5-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q5-4" name="feeling_valued" value="4">
+                        <label for="q5-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q5-5" name="feeling_valued" value="5">
+                        <label for="q5-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>When there's a conflict, does your partner listen to your perspective?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q6-1" name="quality_time" value="1">
+                        <label for="q6-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q6-2" name="quality_time" value="2">
+                        <label for="q6-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q6-3" name="quality_time" value="3">
+                        <label for="q6-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q6-4" name="quality_time" value="4">
+                        <label for="q6-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q6-5" name="quality_time" value="5">
+                        <label for="q6-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Does your partner apologize and take responsibility when they are wrong?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q7-1" name="apology" value="1">
+                        <label for="q7-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q7-2" name="apology" value="2">
+                        <label for="q7-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q7-3" name="apology" value="3">
+                        <label for="q7-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q7-4" name="apology" value="4">
+                        <label for="q7-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q7-5" name="apology" value="5">
+                        <label for="q7-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('relationshipSurvey').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get all form data
+            const formData = {
+                satisfaction: document.querySelector('input[name="satisfaction"]:checked')?.value,
+                emotional_support: document.querySelector('input[name="emotional_support"]:checked')?.value,
+                appreciation: document.querySelector('input[name="appreciation"]:checked')?.value,
+                conflict_handling: document.querySelector('input[name="conflict_handling"]:checked')?.value,
+                feeling_valued: document.querySelector('input[name="feeling_valued"]:checked')?.value,
+                quality_time: document.querySelector('input[name="quality_time"]:checked')?.value,
+                apology: document.querySelector('input[name="apology"]:checked')?.value
+            };
+
+            // Validate all fields are filled
+            if (!formData.satisfaction || !formData.emotional_support || !formData.appreciation || 
+                !formData.conflict_handling || !formData.feeling_valued || !formData.quality_time || !formData.apology) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            try {
+                // Store relationship survey data in localStorage
+                localStorage.setItem('relationshipData', JSON.stringify(formData));
+                
+                // Show continue message and redirect to next section
+                alert('Nice! Continue to the Communication section.');
+                window.location.href = 'communication.html';
+            } catch (error) {
+                console.error("Error:", error);
+                let errorMessage = 'There was an error processing your responses.';
+                
+                if (error.message) {
+                    errorMessage += `\n\nError: ${error.message}`;
+                }
+                
+                errorMessage += '\n\nPlease make sure the ML API is running on port 5000.';
+                alert(errorMessage);
+            }
+        });
+    </script>
+</body>
+</html>

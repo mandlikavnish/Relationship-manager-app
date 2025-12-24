@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="renderer/styles.css">
+</head>
+<body>
+    <header>
+        <button class="back-button" onclick="navigateTo('homepage.html')">← Back</button>
+        <h2>Settings</h2>
+    </header>
+
+    <div class="content-container">
+        <div class="settings-options">
+            <button class="settings-button" onclick="navigateTo('username.html')">Change username</button>
+            <button class="settings-button" onclick="navigateTo('password.html')">Change password</button>
+            <button class="settings-button" onclick="navigateTo('profile.html')">Change profile picture</button>
+            <button class="settings-button" onclick="navigateTo('feedback.html')">Feedback</button>
+            <button class="settings-button" onclick="navigateTo('about.html')">About App</button>
+        </div>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

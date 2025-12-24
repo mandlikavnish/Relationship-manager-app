@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <button onclick="goBack()">Back</button>
+    <script>
+        function goBack() {
+            window.location.href = "homepage.html";
+        }
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .notification { border: 1px solid #ddd; padding: 10px; margin: 5px; cursor: pointer; }
+        .modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                background: white; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+        .modal input { width: 100%; margin-top: 10px; }
+        .modal button { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Today's Notifications</h2>
+    <div id="notificationList">Loading...</div>
+
+    <div class="modal" id="reminderModal">
+        <h3 id="reminderTitle"></h3>
+        <input type="time" id="reminderTime">
+        <button onclick="saveReminder()">Set Reminder</button>
+        <button onclick="closeModal()">Close</button>
+    </div>
+
+    <div class="quotes-container">
+        <div class="quote-box">
+            <p class="quote">"Happiness is not by chance, but by choice."</p>
+            <p class="quote-author">- Jim Rohn</p>
+        </div>
+    
+        <div class="quote-box">
+            <p class="quote">"Believe you can and you're halfway there."</p>
+            <p class="quote-author">- Theodore Roosevelt</p>
+        </div>
+    
+        <div class="quote-box">
+            <p class="quote">"The only limit to our realization of tomorrow is our doubts of today."</p>
+            <p class="quote-author">- Franklin D. Roosevelt</p>
+        </div>
+    </div>
+    
+    
+    
+
+    <script>
+        let today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+        let events = JSON.parse(localStorage.getItem("calendarEvents")) || {};
+        let reminders = JSON.parse(localStorage.getItem("reminders")) || {};
+        let selectedEvent = "";
+
+        function loadNotifications() {
+            let notificationList = document.getElementById("notificationList");
+            notificationList.innerHTML = "";
+
+            if (events[today]) {
+                let eventArray = events[today].split("\n");
+                eventArray.forEach(event => {
+                    let eventDiv = document.createElement("div");
+                    eventDiv.className = "notification";
+                    eventDiv.innerText = event;
+                    eventDiv.onclick = () => openReminderModal(event);
+                    notificationList.appendChild(eventDiv);
+                });
+            } else {
+                notificationList.innerText = "No notifications";
+            }
+        }
+
+        function openReminderModal(event) {
+            selectedEvent = event;
+            document.getElementById("reminderTitle").innerText = `Set Reminder for: ${event}`;
+            document.getElementById("reminderTime").value = reminders[event] || "";
+            document.getElementById("reminderModal").style.display = "block";
+        }
+
+        function saveReminder() {
+            let reminderTime = document.getElementById("reminderTime").value;
+            if (reminderTime) {
+                reminders[selectedEvent] = reminderTime;
+                localStorage.setItem("reminders", JSON.stringify(reminders));
+            } else {
+                delete reminders[selectedEvent];
+                localStorage.setItem("reminders", JSON.stringify(reminders));
+            }
+            closeModal();
+        }
+
+        function closeModal() {
+            document.getElementById("reminderModal").style.display = "none";
+        }
+
+    function checkReminders() {
+    let now = new Date();
+    let hours = now.getHours().toString().padStart(2, '0'); // Ensure 2-digit format
+    let minutes = now.getMinutes().toString().padStart(2, '0'); // Ensure 2-digit format
+    let currentTime = `${hours}:${minutes}`;
+
+    console.log("Checking reminders at:", currentTime); // Debugging log
+
+    for (let event in reminders) {
+        if (reminders[event] === currentTime) {
+            console.log(`Triggering reminder for: ${event}`); // Debugging log
+            showSystemNotification(`Reminder: ${event}`);
+
+            // Remove reminder after showing it
+            delete reminders[event];
+            localStorage.setItem("reminders", JSON.stringify(reminders));
+        }
+    }
+}
+
+
+        function showSystemNotification(message) {
+            if (Notification.permission === "granted") {
+                new Notification(message);
+            } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        new Notification(message);
+                    }
+                });
+            }
+        }
+
+        function showQuoteNotification() {
+            let quotes = [
+                "Believe you can and you're halfway there.",
+                "Your limitation—it’s only your imagination.",
+                "Push yourself, because no one else is going to do it for you.",
+                "Great things never come from comfort zones.",
+                "Success doesn’t just find you. You have to go out and get it."
+            ];
+            let randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            showSystemNotification(randomQuote);
+        }
+
+        // Ask for notification permission when the page loads
+        if (Notification.permission !== "granted") {
+            Notification.requestPermission();
+        }
+
+        // Load notifications
+        loadNotifications();
+        showQuoteNotification();
+        
+
+        // Check reminders every 30 seconds (instead of 60s for better accuracy) 
+        setInterval(checkReminders, 15000); // Check every 15 seconds
+
+    </script>
+    <link rel="stylesheet" href="renderer/box.css">
+</body>
+</html>

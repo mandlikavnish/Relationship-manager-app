@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="renderer/styles.css">
+</head>
+<body>
+    <header>
+        <button id="backHomeBtn">← Back</button>
+        <h2 id="page-title">Feedback</h2>
+    </header>
+
+    <section class="feedback-container">
+        <label for="feedback-text">Your Feedback:</label>
+        <textarea id="feedback-text" placeholder="Type your feedback here..."></textarea>
+        <button id="submitFeedback">Submit</button>
+        <p id="feedback-message" class="hidden">Thank you for responding! 😊</p>
+    </section>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        document.getElementById("backHomeBtn").addEventListener("click", function() {
+            navigateTo('settings.html'); // Now it properly navigates back to settings
+        });
+
+        document.getElementById("submitFeedback").addEventListener("click", () => {
+            const feedbackText = document.getElementById("feedback-text").value.trim();
+            if (feedbackText) {
+                localStorage.setItem("userFeedback", feedbackText);
+                document.getElementById("feedback-text").value = ""; // Clear input
+                document.getElementById("feedback-message").classList.remove("hidden"); // Show thank you message
+            }
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: 'YourAppFont', sans-serif;
+        }
+        .feedback-container {
+            padding: 20px;
+            text-align: center;
+        }
+        textarea {
+            width: 90%;
+            height: 100px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #ff7985;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff7985;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Profile Picture</title>
+    <link rel="stylesheet" href="renderer/styles.css">
+</head>
+<body>
+    <header>
+        <button class="back-button" onclick="navigateBack()">← Back</button>
+        <h2>Change Profile Picture</h2>
+    </header>
+
+    <div class="content-container">
+        <div class="profile-upload">
+            <div class="file-input-wrapper">
+                <label for="fileInput" class="file-input-label">
+                    Choose a photo
+                </label>
+                <input type="file" id="fileInput" accept="image/*" required>
+            </div>
+            <div id="selectedFileName" style="color: #666; margin-top: 10px;"></div>
+            <button id="saveProfilePicBtn" class="primary-button">Save Changes</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("fileInput").addEventListener("change", function(e) {
+            const fileName = e.target.files[0]?.name;
+            if (fileName) {
+                document.getElementById("selectedFileName").textContent = `Selected: ${fileName}`;
+            }
+        });
+
+        document.getElementById("saveProfilePicBtn").addEventListener("click", () => {
+            const fileInput = document.getElementById("fileInput");
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                reader.onloadend = function() {
+                    localStorage.setItem("profilePic", reader.result);
+                    alert("Profile picture updated successfully!");
+                    navigateBack();
+                }
+                reader.readAsDataURL(file);
+            } else {
+                alert("Please choose a file.");
+            }
+        });
+
+        function navigateBack() {
+            window.location.href = "settings.html";
+        }
+    </script>
+</body>
+</html>

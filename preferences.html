@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personality & Preferences Survey</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff4f4;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .back-button {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            font-size: 16px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            background: #ff4d6d;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(255, 77, 109, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #ff3557;
+            transform: scale(1.05);
+        }
+
+        .survey-container {
+            max-width: 600px;
+            margin: 60px auto 20px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.1);
+        }
+
+        h1 {
+            color: #ff4d6d;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            background: #fff8f8;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(255, 77, 109, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.15);
+        }
+
+        .question p {
+            color: #ff4d6d;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        input[type="radio"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff4d6d;
+            border-radius: 50%;
+            margin: 0;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        input[type="radio"]:checked {
+            background-color: #ff4d6d;
+            border-color: #ff4d6d;
+        }
+
+        input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        label {
+            color: #666;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #ff3557;
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            .survey-container {
+                padding: 20px;
+                margin: 50px auto 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .question {
+                padding: 15px;
+            }
+
+            .options {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button onclick="location.href='surveys.html'" class="back-button">← Back</button>
+
+    <div class="survey-container">
+        <h1>Personality & Preferences</h1>
+        
+        <form id="preferencesSurvey">
+            <div class="question">
+                <p>How similar are your hobbies and interests with your partner?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q1-1" name="hobbies" value="1">
+                        <label for="q1-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q1-2" name="hobbies" value="2">
+                        <label for="q1-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q1-3" name="hobbies" value="3">
+                        <label for="q1-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q1-4" name="hobbies" value="4">
+                        <label for="q1-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q1-5" name="hobbies" value="5">
+                        <label for="q1-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>How often do you engage in activities that interest both of you?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q2-1" name="shared_activities" value="1">
+                        <label for="q2-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q2-2" name="shared_activities" value="2">
+                        <label for="q2-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q2-3" name="shared_activities" value="3">
+                        <label for="q2-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q2-4" name="shared_activities" value="4">
+                        <label for="q2-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q2-5" name="shared_activities" value="5">
+                        <label for="q2-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>How much do you enjoy spending quality time together in social settings?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q3-1" name="social_preference" value="1">
+                        <label for="q3-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q3-2" name="social_preference" value="2">
+                        <label for="q3-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q3-3" name="social_preference" value="3">
+                        <label for="q3-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q3-4" name="social_preference" value="4">
+                        <label for="q3-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q3-5" name="social_preference" value="5">
+                        <label for="q3-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>How well do you understand each other's likes and dislikes?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q4-1" name="understanding" value="1">
+                        <label for="q4-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q4-2" name="understanding" value="2">
+                        <label for="q4-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q4-3" name="understanding" value="3">
+                        <label for="q4-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q4-4" name="understanding" value="4">
+                        <label for="q4-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q4-5" name="understanding" value="5">
+                        <label for="q4-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Do you respect each other's different preferences?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q5-1" name="respect" value="1">
+                        <label for="q5-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q5-2" name="respect" value="2">
+                        <label for="q5-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q5-3" name="respect" value="3">
+                        <label for="q5-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q5-4" name="respect" value="4">
+                        <label for="q5-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q5-5" name="respect" value="5">
+                        <label for="q5-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('preferencesSurvey').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get all form data
+            const formData = {
+                hobbies: document.querySelector('input[name="hobbies"]:checked')?.value,
+                shared_activities: document.querySelector('input[name="shared_activities"]:checked')?.value,
+                social_preference: document.querySelector('input[name="social_preference"]:checked')?.value,
+                understanding: document.querySelector('input[name="understanding"]:checked')?.value,
+                respect: document.querySelector('input[name="respect"]:checked')?.value
+            };
+
+            // Validate all fields are filled
+            if (!formData.hobbies || !formData.shared_activities || !formData.social_preference || 
+                !formData.understanding || !formData.respect) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            try {
+                // Store preferences data in localStorage
+                localStorage.setItem('preferencesData', JSON.stringify(formData));
+
+                // Collect ALL data from localStorage
+                const relationshipData = JSON.parse(localStorage.getItem('relationshipData') || '{}');
+                const communicationData = JSON.parse(localStorage.getItem('communicationData') || '{}');
+                const memoriesData = JSON.parse(localStorage.getItem('memoriesData') || '{}');
+                const plansData = JSON.parse(localStorage.getItem('plansData') || '{}');
+                const preferencesData = formData;
+
+                // Build features array in the correct order
+                const features = buildFeatureArray({
+                    ...relationshipData,
+                    ...communicationData,
+                    ...memoriesData,
+                    ...plansData,
+                    ...preferencesData
+                });
+
+                console.log('Sending all features to ML API:', features);
+                
+                // Send to ML API
+                const mlResponse = await fetch('http://localhost:5000/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ features: features })
+                });
+
+                if (!mlResponse.ok) {
+                    const errorData = await mlResponse.json().catch(() => ({ error: 'Unknown error' }));
+                    throw new Error(`ML API error: ${errorData.error || mlResponse.statusText}`);
+                }
+
+                const prediction = await mlResponse.json();
+                console.log('ML API response:', prediction);
+                
+                if (!prediction.result) {
+                    throw new Error('ML API did not return a valid prediction result');
+                }
+                
+                // Store prediction and all survey data in localStorage for chatbot to use
+                localStorage.setItem('relationshipStatus', prediction.result);
+                localStorage.setItem('lastSurveyDate', new Date().toISOString());
+                localStorage.setItem('surveyAnswers', JSON.stringify({
+                    ...relationshipData,
+                    ...communicationData,
+                    ...memoriesData,
+                    ...plansData,
+                    ...preferencesData
+                }));
+
+                // Show final result based on category
+                await showFinalResult(prediction.result);
+            } catch (error) {
+                console.error("Error:", error);
+                let errorMessage = 'There was an error processing your responses.';
+                
+                if (error.message) {
+                    errorMessage += `\n\nError: ${error.message}`;
+                }
+                
+                errorMessage += '\n\nPlease make sure the ML API is running on port 5000.';
+                alert(errorMessage);
+            }
+        });
+
+        // Function to show final result based on prediction
+        async function showFinalResult(prediction) {
+            let message = '';
+            let emoji = '';
+
+            switch(prediction) {
+                case 'Good Job':
+                    message = "Good Job! 🎉\n\nYour relationship is strong and healthy! Keep nurturing your bond by:\n• Continuing to communicate openly\n• Making time for each other\n• Supporting each other's goals\n• Creating new memories together\n\nCome back later to maintain your great scores! 💑";
+                    emoji = '❤️';
+                    break;
+                case 'Needs Work':
+                    message = "Hmm, not bad but there's room for improvement! 💪\n\nHere are some suggestions:\n• Spend more quality time together\n• Practice active listening\n• Share your feelings more openly\n• Work on understanding each other better\n\nCome back later to improve your scores and strengthen your relationship! 🌟";
+                    emoji = '💪';
+                    break;
+                case 'Bad':
+                    message = "We're concerned about your relationship 💔\n\nIt might be time to consider:\n• Professional counseling\n• Open and honest communication\n• Taking time to understand each other's needs\n• Working on trust and respect\n\nPlease take care of yourselves and consider seeking help. You can come back later to track your progress. 🤝";
+                    emoji = '💔';
+                    break;
+                default:
+                    message = 'Thank you for completing all surveys!';
+                    emoji = '✅';
+            }
+
+            // Create a modal to show the result
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 30px;
+                border-radius: 15px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                max-width: 500px;
+                width: 90%;
+                z-index: 1000;
+                text-align: center;
+            `;
+
+            const messageContent = message.split('\n').map(line => {
+                if (line.startsWith('•')) {
+                    return `<div style="text-align: left; margin: 10px 0; color: #666;">${line}</div>`;
+                }
+                return `<div style="margin: 10px 0; color: #ff4d6d; font-weight: 500;">${line}</div>`;
+            }).join('');
+
+            // Add overlay first
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            `;
+            
+            const closeModal = () => {
+                overlay.remove();
+                modal.remove();
+                window.location.href = 'surveys.html';
+            };
+            
+            overlay.onclick = closeModal;
+
+            const continueBtn = document.createElement('button');
+            continueBtn.textContent = 'Continue';
+            continueBtn.style.cssText = `
+                background: #ff4d6d; 
+                color: white; 
+                border: none; 
+                padding: 12px 30px; 
+                border-radius: 25px; 
+                margin-top: 20px; 
+                cursor: pointer; 
+                font-size: 16px;
+            `;
+            continueBtn.onclick = closeModal;
+
+            modal.innerHTML = `
+                <div style="font-size: 24px; margin-bottom: 20px;">${emoji}</div>
+                ${messageContent}
+            `;
+            modal.appendChild(continueBtn);
+
+            document.body.appendChild(overlay);
+            document.body.appendChild(modal);
+        }
+
+        // Function to build features array in correct order
+        function buildFeatureArray(data) {
+            // Log the data we're working with
+            console.log('Building features from data:', data);
+            
+            // Convert all values to numbers and ensure they're between 1-5
+            const features = [
+                Math.min(Math.max(Number(data.apology) || 3, 1), 5),
+                Math.min(Math.max(Number(data.appreciation) || 3, 1), 5),
+                Math.min(Math.max(Number(data.conflict_handling) || 3, 1), 5),
+                Math.min(Math.max(Number(data.emotional_support) || 3, 1), 5),
+                Math.min(Math.max(Number(data.feeling_valued) || 3, 1), 5),
+                Math.min(Math.max(Number(data.quality_time) || 3, 1), 5),
+                Math.min(Math.max(Number(data.satisfaction) || 3, 1), 5),
+                Math.min(Math.max(Number(data.comm_preference) || 3, 1), 5),
+                Math.min(Math.max(Number(data.disagreements) || 3, 1), 5),
+                Math.min(Math.max(Number(data.expression) || 3, 1), 5),
+                Math.min(Math.max(Number(data.listening) || 3, 1), 5),
+                Math.min(Math.max(Number(data.new_memories) || 3, 1), 5),
+                Math.min(Math.max(Number(data.reminisce) || 3, 1), 5),
+                Math.min(Math.max(Number(data.revisit) || 3, 1), 5),
+                Math.min(Math.max(Number(data.souvenirs) || 3, 1), 5),
+                Math.min(Math.max(Number(data.aligned) || 3, 1), 5),
+                Math.min(Math.max(Number(data.financial) || 3, 1), 5),
+                Math.min(Math.max(Number(data.goals) || 3, 1), 5),
+                Math.min(Math.max(Number(data.life_changes) || 3, 1), 5),
+                Math.min(Math.max(Number(data.hobbies) || 3, 1), 5),
+                Math.min(Math.max(Number(data.respect) || 3, 1), 5),
+                Math.min(Math.max(Number(data.shared_activities) || 3, 1), 5),
+                Math.min(Math.max(Number(data.social_preference) || 3, 1), 5),
+                Math.min(Math.max(Number(data.understanding) || 3, 1), 5)
+            ];
+            
+            console.log('Built features array:', features);
+            return features;
+        }
+    </script>
+</body>
+</html>

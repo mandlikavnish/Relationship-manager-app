@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Loved Ones</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 10px;
+        }
+
+        .back-button {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 20px;
+        }
+
+        h2 {
+            color: #d75f75;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .add-contact-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .add-contact-btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .contact-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(215, 95, 117, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(215, 95, 117, 0.3);
+            background-color: #fff0f0;
+        }
+
+        .contact-name {
+            color: #d75f75;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .contact-phone {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .modal-header {
+            color: #d75f75;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #d75f75;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ffb3b3;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .save-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .save-btn:hover {
+            background-color: #ff4d4d;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #d75f75;
+            cursor: pointer;
+        }
+
+        .dismiss-btn {
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .dismiss-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .add-contact-form {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(215, 95, 117, 0.2);
+        }
+
+        .add-contact-form.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="back-button" onclick="goBack()">← Back</button>
+        <h2>My Loved Ones</h2>
+    </div>
+
+    <button class="add-contact-btn" onclick="toggleAddContactForm()">Add New Contact</button>
+
+    <div class="add-contact-form" id="addContactForm">
+        <h3 class="modal-header">Add New Contact</h3>
+        <form id="newContactForm">
+            <div class="form-group">
+                <label for="newName">Name</label>
+                <input type="text" id="newName" required>
+            </div>
+            <div class="form-group">
+                <label for="newPhone">Phone Number</label>
+                <input type="tel" id="newPhone" required>
+            </div>
+            <div class="form-group">
+                <label for="newBirthday">Birthday</label>
+                <input type="date" id="newBirthday">
+            </div>
+            <div class="form-group">
+                <label for="newAnniversary">Anniversary (optional)</label>
+                <input type="date" id="newAnniversary">
+            </div>
+            <div class="form-group">
+                <label for="newOtherDates">Other Important Dates</label>
+                <input type="date" id="newOtherDates">
+            </div>
+            <div class="form-group">
+                <label for="newNotes">Notes</label>
+                <input type="text" id="newNotes" placeholder="Add any special notes...">
+            </div>
+            <button type="submit" class="save-btn">Add Contact</button>
+        </form>
+    </div>
+
+    <div class="contacts-grid" id="contacts-grid"></div>
+
+    <!-- Contact Details Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h3 class="modal-header" id="modalContactName"></h3>
+            <form id="contactDetailsForm">
+                <div class="form-group">
+                    <label for="birthday">Birthday</label>
+                    <input type="date" id="birthday" required>
+                </div>
+                <div class="form-group">
+                    <label for="anniversary">Anniversary (optional)</label>
+                    <input type="date" id="anniversary">
+                </div>
+                <div class="form-group">
+                    <label for="otherDates">Other Important Dates</label>
+                    <input type="date" id="otherDates">
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <input type="text" id="notes" placeholder="Add any special notes...">
+                </div>
+                <button type="submit" class="save-btn">Save Details</button>
+            </form>
+            <button class="dismiss-btn" onclick="dismissContact()">Dismiss Contact</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedContact = null;
+        const contactsGrid = document.getElementById("contacts-grid");
+        const modal = document.getElementById("contactModal");
+        const modalContactName = document.getElementById("modalContactName");
+        const contactDetailsForm = document.getElementById("contactDetailsForm");
+        const addContactForm = document.getElementById("addContactForm");
+        const newContactForm = document.getElementById("newContactForm");
+
+        // Load contacts data from localStorage or initialize empty object
+        let contactsData = JSON.parse(localStorage.getItem("contactsData")) || {};
+
+        function toggleAddContactForm() {
+            addContactForm.classList.toggle('active');
+        }
+
+        function createContactCards() {
+            contactsGrid.innerHTML = "";
+            Object.keys(contactsData).forEach(name => {
+                const contact = contactsData[name];
+                const card = document.createElement("div");
+                card.className = "contact-card";
+                card.innerHTML = `
+                    <div class="contact-name">${name}</div>
+                    <div class="contact-phone">${contact.phone ? contact.phone : 'No phone number'}</div>
+                `;
+                card.onclick = () => openModal({ name: name, phone: contact.phone });
+                contactsGrid.appendChild(card);
+            });
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toISOString().split('T')[0];
+        }
+
+        function openModal(contact) {
+            selectedContact = contact;
+            modalContactName.textContent = contact.name;
+            
+            const contactData = contactsData[contact.name];
+            const form = document.getElementById("contactDetailsForm");
+            form.reset();
+
+            if (contactData) {
+                if (contactData.birthday) document.getElementById("birthday").value = contactData.birthday;
+                if (contactData.anniversary) document.getElementById("anniversary").value = contactData.anniversary;
+                if (contactData.otherDates) document.getElementById("otherDates").value = contactData.otherDates;
+                if (contactData.notes) document.getElementById("notes").value = contactData.notes;
+            }
+
+            modal.style.display = "flex";
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        function goBack() {
+            window.location.href = "homepage.html";
+        }
+
+        function updateCalendarEvents(name, events) {
+            let calendarEvents = JSON.parse(localStorage.getItem("calendarEvents")) || {};
+            Object.keys(calendarEvents).forEach(date => {
+                if (calendarEvents[date].includes(name)) {
+                    const events = calendarEvents[date].split('\n').filter(e => !e.startsWith(name));
+                    if (events.length === 0) {
+                        delete calendarEvents[date];
+                    } else {
+                        calendarEvents[date] = events.join('\n');
+                    }
+                }
+            });
+
+            events.forEach(event => {
+                const formattedDate = formatDate(event.date);
+                const eventText = `${name}: ${event.event}`;
+                if (calendarEvents[formattedDate]) {
+                    if (!calendarEvents[formattedDate].includes(eventText)) {
+                        calendarEvents[formattedDate] += '\n' + eventText;
+                    }
+                } else {
+                    calendarEvents[formattedDate] = eventText;
+                }
+            });
+
+            localStorage.setItem("calendarEvents", JSON.stringify(calendarEvents));
+        }
+
+        newContactForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById("newName").value.trim();
+            const phone = document.getElementById("newPhone").value.trim();
+            const birthday = document.getElementById("newBirthday").value;
+            const anniversary = document.getElementById("newAnniversary").value;
+            const otherDates = document.getElementById("newOtherDates").value;
+            const notes = document.getElementById("newNotes").value;
+
+            // Prevent adding contacts with empty name or phone
+            if (!name) {
+                alert('Please enter a valid name.');
+                return;
+            }
+            if (!phone) {
+                alert('Please enter a phone number.');
+                return;
+            }
+
+            // Store the contact data
+            contactsData[name] = {
+                phone: phone,
+                birthday: birthday,
+                anniversary: anniversary,
+                otherDates: otherDates,
+                notes: notes
+            };
+
+            // Save to localStorage
+            localStorage.setItem("contactsData", JSON.stringify(contactsData));
+
+            // Prepare events for calendar
+            const events = [];
+            if (birthday) {
+                events.push({ date: birthday, event: "Birthday" });
+            }
+            if (anniversary) {
+                events.push({ date: anniversary, event: "Anniversary" });
+            }
+            if (otherDates) {
+                events.push({ date: otherDates, event: notes || "Important Date" });
+            }
+
+            // Update calendar events
+            updateCalendarEvents(name, events);
+
+            alert("Contact added successfully! Calendar has been updated.");
+            newContactForm.reset();
+            addContactForm.classList.remove('active');
+            createContactCards();
+        });
+
+        contactDetailsForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const birthday = document.getElementById("birthday").value;
+            const anniversary = document.getElementById("anniversary").value;
+            const otherDates = document.getElementById("otherDates").value;
+            const notes = document.getElementById("notes").value;
+
+            // Update the contact data
+            contactsData[selectedContact.name] = {
+                ...contactsData[selectedContact.name],
+                birthday: birthday,
+                anniversary: anniversary,
+                otherDates: otherDates,
+                notes: notes
+            };
+
+            // Save to localStorage
+            localStorage.setItem("contactsData", JSON.stringify(contactsData));
+
+            // Prepare events for calendar
+            const events = [];
+            if (birthday) {
+                events.push({ date: birthday, event: "Birthday" });
+            }
+            if (anniversary) {
+                events.push({ date: anniversary, event: "Anniversary" });
+            }
+            if (otherDates) {
+                events.push({ date: otherDates, event: notes || "Important Date" });
+            }
+
+            // Update calendar events
+            updateCalendarEvents(selectedContact.name, events);
+
+            alert("Contact details saved successfully! Calendar has been updated.");
+            closeModal();
+            createContactCards();
+        });
+
+        function dismissContact() {
+            if (!selectedContact) return;
+
+            const confirmDelete = confirm(`Are you sure you want to dismiss ${selectedContact.name}?`);
+            if (!confirmDelete) return;
+
+            // Remove contact from localStorage
+            delete contactsData[selectedContact.name];
+            localStorage.setItem("contactsData", JSON.stringify(contactsData));
+
+            // Remove the contact from the calendar
+            let calendarEvents = JSON.parse(localStorage.getItem("calendarEvents")) || {};
+            Object.keys(calendarEvents).forEach(date => {
+                if (calendarEvents[date].includes(selectedContact.name)) {
+                    delete calendarEvents[date];
+                }
+            });
+            localStorage.setItem("calendarEvents", JSON.stringify(calendarEvents));
+
+            alert(`${selectedContact.name} has been dismissed and removed from the contacts & calendar.`);
+            closeModal();
+            createContactCards();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize the contact cards
+        createContactCards();
+    </script>
+</body>
+</html>

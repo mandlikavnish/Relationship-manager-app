@@ -1,0 +1,122 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #f7ede2, #f5ebe0);
+    color: #5b4636;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+h2 {
+    color: #8d6b48;
+}
+
+/* Category Buttons */
+.categories {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.category {
+    background: #dac0a3;
+    color: #5b4636;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.category:hover {
+    background: #c9a98c;
+    transform: scale(1.05);
+}
+
+/* Survey Questions */
+.question {
+    background: #f8e8d0;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.question:hover {
+    transform: scale(1.02);
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Submit Button */
+#submit-btn {
+    background: #a67c52;
+    color: white;
+    border: none;
+    padding: 12px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+#submit-btn:hover {
+    background: #8d6b48;
+    transform: scale(1.05);
+}
+
+/* Summary Box */
+.summary {
+    background: #fdf5e6;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.6s;
+}
+
+/* Back Button */
+.back-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #d4a373;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.back-button:hover {
+    background: #b8875e;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+

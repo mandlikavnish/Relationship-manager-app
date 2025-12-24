@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorable Moments Survey</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff4f4;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .back-button {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            font-size: 16px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            background: #ff4d6d;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(255, 77, 109, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #ff3557;
+            transform: scale(1.05);
+        }
+
+        .survey-container {
+            max-width: 600px;
+            margin: 60px auto 20px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.1);
+        }
+
+        h1 {
+            color: #ff4d6d;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            background: #fff8f8;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(255, 77, 109, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.15);
+        }
+
+        .question p {
+            color: #ff4d6d;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        input[type="radio"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff4d6d;
+            border-radius: 50%;
+            margin: 0;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        input[type="radio"]:checked {
+            background-color: #ff4d6d;
+            border-color: #ff4d6d;
+        }
+
+        input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        label {
+            color: #666;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #ff3557;
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            .survey-container {
+                padding: 20px;
+                margin: 50px auto 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .question {
+                padding: 15px;
+            }
+
+            .options {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button onclick="location.href='surveys.html'" class="back-button">← Back</button>
+
+    <div class="survey-container">
+        <h1>Memorable Moments</h1>
+        
+        <form id="memoriesSurvey">
+            <div class="question">
+                <p>How often do you create new memories together?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q1-1" name="new_memories" value="1">
+                        <label for="q1-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q1-2" name="new_memories" value="2">
+                        <label for="q1-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q1-3" name="new_memories" value="3">
+                        <label for="q1-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q1-4" name="new_memories" value="4">
+                        <label for="q1-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q1-5" name="new_memories" value="5">
+                        <label for="q1-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Do you reminisce about past experiences?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q2-1" name="reminisce" value="1">
+                        <label for="q2-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q2-2" name="reminisce" value="2">
+                        <label for="q2-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q2-3" name="reminisce" value="3">
+                        <label for="q2-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q2-4" name="reminisce" value="4">
+                        <label for="q2-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q2-5" name="reminisce" value="5">
+                        <label for="q2-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Do you take pictures or keep souvenirs of special moments?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q3-1" name="souvenirs" value="1">
+                        <label for="q3-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q3-2" name="souvenirs" value="2">
+                        <label for="q3-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q3-3" name="souvenirs" value="3">
+                        <label for="q3-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q3-4" name="souvenirs" value="4">
+                        <label for="q3-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q3-5" name="souvenirs" value="5">
+                        <label for="q3-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>How often do you revisit places that are special to you?</p>
+                <div class="options">
+                    <div class="radio-group">
+                        <input type="radio" id="q4-1" name="revisit" value="1">
+                        <label for="q4-1">1</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q4-2" name="revisit" value="2">
+                        <label for="q4-2">2</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q4-3" name="revisit" value="3">
+                        <label for="q4-3">3</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q4-4" name="revisit" value="4">
+                        <label for="q4-4">4</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="q4-5" name="revisit" value="5">
+                        <label for="q4-5">5</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('memoriesSurvey').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get all form data
+            const formData = {
+                new_memories: document.querySelector('input[name="new_memories"]:checked')?.value,
+                reminisce: document.querySelector('input[name="reminisce"]:checked')?.value,
+                souvenirs: document.querySelector('input[name="souvenirs"]:checked')?.value,
+                revisit: document.querySelector('input[name="revisit"]:checked')?.value
+            };
+
+            // Validate all fields are filled
+            if (!formData.new_memories || !formData.reminisce || !formData.souvenirs || !formData.revisit) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+
+            try {
+                // Store memories survey data in localStorage
+                localStorage.setItem('memoriesData', JSON.stringify(formData));
+                
+                // Show continue message and redirect to next section
+                alert('Nice! Continue to the Plans section.');
+                window.location.href = 'plans.html';
+            } catch (error) {
+                console.error("Error:", error);
+                alert('There was an error processing your responses. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

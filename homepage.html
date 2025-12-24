@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memolink</title>
+    <link rel="stylesheet" href="renderer/styles.css">
+    <style>
+        /* Add styles for the new music button */
+        .nav-icon {
+            cursor: pointer;
+            padding: 10px;
+        }
+        .question-modal {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .question-modal button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="top-bar">
+            <div id="app-logo">
+                <img src="renderer/memo.png" alt="Memolink Logo">
+                <span>Memolink✨</span>
+            </div>
+            <div id="menu-icon" onclick="navigateTo('settings.html')">&#9776;</div>
+        </div>
+    </header>
+
+    <section id="profile-section">
+        <img id="profile-pic" src="renderer/profile.png" alt="Profile Picture" class="profile-pic">
+        <span id="username">User</span>
+    </section>
+
+    <section class="quote-container">
+        <p id="quote-box">Loading....</p>
+    </section>
+
+    <section id="features">
+        <div class="feature-box" id="love" onclick="navigateTo('contacts.html')">
+            <h3>My Loved Ones</h3>
+        </div>
+        <div class="feature-box" id="imp-date" onclick="navigateTo('calendar.html')">
+            <h3>Important Dates Tracker</h3>
+        </div>
+        <div class="feature-box" id="notif" onclick="navigateTo('notification.html')">
+            <h3>Notifications</h3>
+        </div>
+        <div class="feature-box" id="surveys" onclick="navigateTo('surveys.html')">
+            <h3>Surveys</h3>
+        </div>
+    </section>
+
+    <nav id="bottom-nav">
+        <div class="nav-icon" id="notes-btn">Notes🗒️</div>
+        <div class="nav-icon" id="gift-btn">Gift🎁</div>
+        <div class="nav-icon" id="music-btn" onclick="openMusicModal()">Music🎶</div>
+    </nav>
+
+    <div id="dynamic-content"></div>
+
+    <!-- Music Question Modal -->
+    <div id="music-modal" class="question-modal">
+        <h3>Hey there! How are you feeling today?</h3>
+        <button onclick="suggestPlaylist('happy')">Happy</button>
+        <button onclick="suggestPlaylist('sad')">Sad</button>
+        <button onclick="suggestPlaylist('angry')">Angry</button>
+        <button onclick="suggestPlaylist('sleepy')">Sleepy</button>
+        <button onclick="closeMusicModal()">Cancel</button>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const quoteBox = document.getElementById("quote-box");
+
+            fetch("https://api.quotable.io/random")
+                .then(response => response.json())
+                .then(data => {
+                    quoteBox.textContent = `"${data.content}" - ${data.author}`;
+                })
+                .catch(error => {
+                    console.error("Error fetching quote:", error);
+                    quoteBox.textContent = "“The biggest adventure you can take is to live the life of your dreams.” —Oprah Winfrey";
+                });
+
+                document.getElementById('notes-btn').addEventListener('click', () => {
+    window.location.href = 'notes.html';
+});
+
+document.getElementById('gift-btn').addEventListener('click', () => {
+    window.location.href = 'gift.html';
+});
+
+            // Load profile picture from local storage
+            const profilePic = localStorage.getItem("profilePic");
+            if (profilePic) {
+                document.getElementById("profile-pic").src = profilePic;
+            }
+        });
+
+        function openMusicModal() {
+            document.getElementById("music-modal").style.display = "block";
+        }
+
+        function closeMusicModal() {
+            document.getElementById("music-modal").style.display = "none";
+        }
+
+       
+            const { shell } = require('electron');
+
+ function suggestPlaylist(mood) {
+    let link = '';
+    switch (mood) {
+        case 'happy':
+            link = 'https://www.youtube.com/watch?v=Cc_cNEjAh_Y&list=PL8U7gDbfLksNOQ-IbN_jfC9DVQYt4xXTo';
+            break;
+        case 'sad':
+            link = 'https://www.youtube.com/watch?v=Xk3O6Pr1HGY';
+            break;
+        case 'angry':
+            link = 'https://www.youtube.com/watch?v=WqocXW4JUdk';
+            break;
+        case 'sleepy':
+            link = 'https://www.youtube.com/watch?v=hbEAyIuQqlI';
+            break;
+    }
+    shell.openExternal(link); // This will open the link in the default browser
+    closeMusicModal();
+}
+
+    </script>
+
+    <script src="renderer/homepage.js"></script>
+</body>
+</html>

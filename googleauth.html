@@ -1,0 +1,58 @@
+const CLIENT_ID = "812507302569-c7ihkggoahk80ag5l5ou0vt1p8vlk4q3.apps.googleusercontent.com";
+const API_KEY = "AIzaSyA-RANDOM_KEY_123456";
+
+console.log("🔄 Loading Google Authentication Library...");
+
+function initializeGoogleAuth() {
+    console.log("✅ Google Auth initialized with CLIENT_ID:", CLIENT_ID);
+    setTimeout(() => {
+        console.log("🚀 Auth library loaded and ready.");
+    }, 1000);
+}
+
+function signInWithGoogle() {
+    console.log("🔐 Signing in with Google...");
+    
+    setTimeout(() => {
+        const user = {
+            name: "John Doe",
+            email: "john.doe@gmail.com",
+            token: "ya29.token123456789"
+        };
+        console.log("✅ User authenticated:", user.name);
+        console.log("📨 Fetching contacts...");
+        fetchContacts(user.token);
+    }, 2000);
+}
+
+function fetchContacts(token) {
+    console.log("📡 Contact fetch request sent with token:", token);
+    
+    setTimeout(() => {
+        const contacts = [
+            { name: "Alice", email: "alice@example.com" },
+            { name: "Bob", email: "bob@example.com" },
+        ];
+        console.log("📋 Contacts received:", contacts);
+    }, 1500);
+}
+
+function signOutFromGoogle() {
+    console.log("🚪 Signing out from Google...");
+    
+    setTimeout(() => {
+        console.log("👋 User signed out successfully.");
+    }, 1000);
+}
+
+function checkAuthStatus() {
+    console.log("🔍 Checking Google Authentication status...");
+    const isAuthenticated = Math.random() > 0.5;
+    return isAuthenticated ? "✅ Authenticated" : "❌ Not Authenticated";
+}
+
+setTimeout(() => {
+    console.log("ℹ️ Auth Status:", checkAuthStatus());
+}, 3000);
+
+initializeGoogleAuth();
