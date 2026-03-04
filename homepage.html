@@ -34,7 +34,7 @@
                 <img src="renderer/memo.png" alt="Memolink Logo">
                 <span>Memolink✨</span>
             </div>
-            <div id="menu-icon" onclick="navigateTo('settings.html')">&#9776;</div>
+            <div id="menu-icon">&#9776;</div>
         </div>
     </header>
 
@@ -48,16 +48,16 @@
     </section>
 
     <section id="features">
-        <div class="feature-box" id="love" onclick="navigateTo('contacts.html')">
+        <div class="feature-box" id="love">
             <h3>My Loved Ones</h3>
         </div>
-        <div class="feature-box" id="imp-date" onclick="navigateTo('calendar.html')">
+        <div class="feature-box" id="imp-date">
             <h3>Important Dates Tracker</h3>
         </div>
-        <div class="feature-box" id="notif" onclick="navigateTo('notification.html')">
+        <div class="feature-box" id="notif">
             <h3>Notifications</h3>
         </div>
-        <div class="feature-box" id="surveys" onclick="navigateTo('surveys.html')">
+        <div class="feature-box" id="surveys">
             <h3>Surveys</h3>
         </div>
     </section>
@@ -65,86 +65,9 @@
     <nav id="bottom-nav">
         <div class="nav-icon" id="notes-btn">Notes🗒️</div>
         <div class="nav-icon" id="gift-btn">Gift🎁</div>
-        <div class="nav-icon" id="music-btn" onclick="openMusicModal()">Music🎶</div>
     </nav>
 
     <div id="dynamic-content"></div>
-
-    <!-- Music Question Modal -->
-    <div id="music-modal" class="question-modal">
-        <h3>Hey there! How are you feeling today?</h3>
-        <button onclick="suggestPlaylist('happy')">Happy</button>
-        <button onclick="suggestPlaylist('sad')">Sad</button>
-        <button onclick="suggestPlaylist('angry')">Angry</button>
-        <button onclick="suggestPlaylist('sleepy')">Sleepy</button>
-        <button onclick="closeMusicModal()">Cancel</button>
-    </div>
-
-    <script>
-        function navigateTo(page) {
-            window.location.href = page;
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const quoteBox = document.getElementById("quote-box");
-
-            fetch("https://api.quotable.io/random")
-                .then(response => response.json())
-                .then(data => {
-                    quoteBox.textContent = `"${data.content}" - ${data.author}`;
-                })
-                .catch(error => {
-                    console.error("Error fetching quote:", error);
-                    quoteBox.textContent = "“The biggest adventure you can take is to live the life of your dreams.” —Oprah Winfrey";
-                });
-
-                document.getElementById('notes-btn').addEventListener('click', () => {
-    window.location.href = 'notes.html';
-});
-
-document.getElementById('gift-btn').addEventListener('click', () => {
-    window.location.href = 'gift.html';
-});
-
-            // Load profile picture from local storage
-            const profilePic = localStorage.getItem("profilePic");
-            if (profilePic) {
-                document.getElementById("profile-pic").src = profilePic;
-            }
-        });
-
-        function openMusicModal() {
-            document.getElementById("music-modal").style.display = "block";
-        }
-
-        function closeMusicModal() {
-            document.getElementById("music-modal").style.display = "none";
-        }
-
-       
-            const { shell } = require('electron');
-
- function suggestPlaylist(mood) {
-    let link = '';
-    switch (mood) {
-        case 'happy':
-            link = 'https://www.youtube.com/watch?v=Cc_cNEjAh_Y&list=PL8U7gDbfLksNOQ-IbN_jfC9DVQYt4xXTo';
-            break;
-        case 'sad':
-            link = 'https://www.youtube.com/watch?v=Xk3O6Pr1HGY';
-            break;
-        case 'angry':
-            link = 'https://www.youtube.com/watch?v=WqocXW4JUdk';
-            break;
-        case 'sleepy':
-            link = 'https://www.youtube.com/watch?v=hbEAyIuQqlI';
-            break;
-    }
-    shell.openExternal(link); // This will open the link in the default browser
-    closeMusicModal();
-}
-
-    </script>
 
     <script src="renderer/homepage.js"></script>
 </body>

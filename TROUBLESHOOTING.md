@@ -4,13 +4,13 @@
 
 ### Issue 1: "Error when submitting survey"
 **Solution:**
-1. Make sure ML API is running on port 5000
-2. Double-click `start_apis.bat` or manually run:
+1. Make sure the relationship evaluation server is running on port 5000
+2. In a terminal, run:
    ```bash
-   cd renderer\relationship-ml-api
-   python app.py
+   cd relationship-agent
+   python relationship_evaluator.py
    ```
-3. Check the terminal - you should see "Starting ML API on http://localhost:5000"
+3. Check the terminal - you should see "Running on http://0.0.0.0:5000"
 
 ### Issue 2: "Sorry, trouble connecting to server" (Chatbot)
 **Solution:**
@@ -34,25 +34,23 @@
 1. Python is installed: `python --version`
 2. Dependencies are installed:
    ```bash
-   cd renderer\relationship-ml-api
-   pip install -r requirements.txt
+   pip install flask flask-cors
    
-   cd ..\chatbot-api
+   cd renderer\chatbot-api
    pip install -r requirements.txt
    ```
 3. Ports are not in use:
-   - Run `check_apis.bat` to see what's running
    - Close any other apps using ports 5000 or 5001
 
 ### Issue 4: "Module not found" errors
 **Solution:**
 ```bash
-pip install flask flask-cors joblib scikit-learn numpy
+pip install flask flask-cors
 ```
 
 ### Quick Check Script
 Run `check_apis.bat` to verify:
-- ML API is running (port 5000)
+- Relationship evaluation server is running (port 5000)
 - Chatbot API is running (port 5001)
 - Ollama is accessible
 
@@ -74,8 +72,8 @@ Run `check_apis.bat` to verify:
 
 ## Testing the APIs
 
-### Test ML API:
-Open browser: `http://localhost:5000/predict`
+### Test relationship evaluation API:
+Open browser: `http://localhost:5000/evaluate`
 (Should show an error page - that's normal, it expects POST requests)
 
 ### Test Chatbot API:

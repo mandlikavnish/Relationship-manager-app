@@ -331,51 +331,45 @@
                 const plansData = JSON.parse(localStorage.getItem('plansData') || '{}');
                 const preferencesData = formData;
 
-                // Build features array in the correct order
-                const features = buildFeatureArray({
+                // Combine all survey answers into one object
+                const allAnswers = {
                     ...relationshipData,
                     ...communicationData,
                     ...memoriesData,
                     ...plansData,
                     ...preferencesData
-                });
+                };
 
-                console.log('Sending all features to ML API:', features);
+                console.log('Sending all survey answers to evaluation API:', allAnswers);
                 
-                // Send to ML API
-                const mlResponse = await fetch('http://localhost:5000/predict', {
+                // Send to evaluation API (Python script with rule-based scoring)
+                const response = await fetch('http://localhost:5000/evaluate', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ features: features })
+                    body: JSON.stringify({ answers: allAnswers })
                 });
 
-                if (!mlResponse.ok) {
-                    const errorData = await mlResponse.json().catch(() => ({ error: 'Unknown error' }));
-                    throw new Error(`ML API error: ${errorData.error || mlResponse.statusText}`);
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+                    throw new Error(`Evaluation API error: ${errorData.error || response.statusText}`);
                 }
 
-                const prediction = await mlResponse.json();
-                console.log('ML API response:', prediction);
+                const result = await response.json();
+                console.log('Evaluation API response:', result);
                 
-                if (!prediction.result) {
-                    throw new Error('ML API did not return a valid prediction result');
+                if (!result.category || !result.message) {
+                    throw new Error('Evaluation API did not return a valid result');
                 }
                 
-                // Store prediction and all survey data in localStorage for chatbot to use
-                localStorage.setItem('relationshipStatus', prediction.result);
+                // Store result and all survey data in localStorage
+                localStorage.setItem('relationshipStatus', result.category);
                 localStorage.setItem('lastSurveyDate', new Date().toISOString());
-                localStorage.setItem('surveyAnswers', JSON.stringify({
-                    ...relationshipData,
-                    ...communicationData,
-                    ...memoriesData,
-                    ...plansData,
-                    ...preferencesData
-                }));
+                localStorage.setItem('surveyAnswers', JSON.stringify(allAnswers));
 
-                // Show final result based on category
-                await showFinalResult(prediction.result);
+                // Show final result based on category/message
+                await showFinalResult(result.category, result.message);
             } catch (error) {
                 console.error("Error:", error);
                 let errorMessage = 'There was an error processing your responses.';
@@ -384,31 +378,27 @@
                     errorMessage += `\n\nError: ${error.message}`;
                 }
                 
-                errorMessage += '\n\nPlease make sure the ML API is running on port 5000.';
+                errorMessage += '\n\nPlease make sure the evaluation server is running on port 5000.';
                 alert(errorMessage);
             }
         });
 
-        // Function to show final result based on prediction
-        async function showFinalResult(prediction) {
-            let message = '';
+        // Function to show final result based on category/message
+        async function showFinalResult(category, backendMessage) {
+            let message = backendMessage || '';
             let emoji = '';
 
-            switch(prediction) {
-                case 'Good Job':
-                    message = "Good Job! 🎉\n\nYour relationship is strong and healthy! Keep nurturing your bond by:\n• Continuing to communicate openly\n• Making time for each other\n• Supporting each other's goals\n• Creating new memories together\n\nCome back later to maintain your great scores! 💑";
+            switch(category) {
+                case 'happy':
                     emoji = '❤️';
                     break;
-                case 'Needs Work':
-                    message = "Hmm, not bad but there's room for improvement! 💪\n\nHere are some suggestions:\n• Spend more quality time together\n• Practice active listening\n• Share your feelings more openly\n• Work on understanding each other better\n\nCome back later to improve your scores and strengthen your relationship! 🌟";
+                case 'needs_work':
                     emoji = '💪';
                     break;
-                case 'Bad':
-                    message = "We're concerned about your relationship 💔\n\nIt might be time to consider:\n• Professional counseling\n• Open and honest communication\n• Taking time to understand each other's needs\n• Working on trust and respect\n\nPlease take care of yourselves and consider seeking help. You can come back later to track your progress. 🤝";
+                case 'bad':
                     emoji = '💔';
                     break;
                 default:
-                    message = 'Thank you for completing all surveys!';
                     emoji = '✅';
             }
 
@@ -478,43 +468,6 @@
 
             document.body.appendChild(overlay);
             document.body.appendChild(modal);
-        }
-
-        // Function to build features array in correct order
-        function buildFeatureArray(data) {
-            // Log the data we're working with
-            console.log('Building features from data:', data);
-            
-            // Convert all values to numbers and ensure they're between 1-5
-            const features = [
-                Math.min(Math.max(Number(data.apology) || 3, 1), 5),
-                Math.min(Math.max(Number(data.appreciation) || 3, 1), 5),
-                Math.min(Math.max(Number(data.conflict_handling) || 3, 1), 5),
-                Math.min(Math.max(Number(data.emotional_support) || 3, 1), 5),
-                Math.min(Math.max(Number(data.feeling_valued) || 3, 1), 5),
-                Math.min(Math.max(Number(data.quality_time) || 3, 1), 5),
-                Math.min(Math.max(Number(data.satisfaction) || 3, 1), 5),
-                Math.min(Math.max(Number(data.comm_preference) || 3, 1), 5),
-                Math.min(Math.max(Number(data.disagreements) || 3, 1), 5),
-                Math.min(Math.max(Number(data.expression) || 3, 1), 5),
-                Math.min(Math.max(Number(data.listening) || 3, 1), 5),
-                Math.min(Math.max(Number(data.new_memories) || 3, 1), 5),
-                Math.min(Math.max(Number(data.reminisce) || 3, 1), 5),
-                Math.min(Math.max(Number(data.revisit) || 3, 1), 5),
-                Math.min(Math.max(Number(data.souvenirs) || 3, 1), 5),
-                Math.min(Math.max(Number(data.aligned) || 3, 1), 5),
-                Math.min(Math.max(Number(data.financial) || 3, 1), 5),
-                Math.min(Math.max(Number(data.goals) || 3, 1), 5),
-                Math.min(Math.max(Number(data.life_changes) || 3, 1), 5),
-                Math.min(Math.max(Number(data.hobbies) || 3, 1), 5),
-                Math.min(Math.max(Number(data.respect) || 3, 1), 5),
-                Math.min(Math.max(Number(data.shared_activities) || 3, 1), 5),
-                Math.min(Math.max(Number(data.social_preference) || 3, 1), 5),
-                Math.min(Math.max(Number(data.understanding) || 3, 1), 5)
-            ];
-            
-            console.log('Built features array:', features);
-            return features;
         }
     </script>
 </body>
