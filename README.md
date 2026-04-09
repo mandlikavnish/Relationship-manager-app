@@ -1,74 +1,127 @@
-# Relationship Agent
+# 💖 Relationship Manager App (Memolink)
 
-A web-based relationship health tracker that helps couples reflect on their relationship through surveys, communication tools, and personalized insights.
+## 👥 Contributors
 
-## Features
+* Avnish Mandlik
+* Rohit Michael
 
-- Relationship health surveys & scoring
-- Communication tracking
-- Shared memories, calendar, and plans
-- Contact management
-- Notifications and feedback system
-- Secure login with profile management
+## 📌 Description
 
-## Tech Stack
+A full-stack web application designed to help users track and improve their relationships through surveys, communication tools, shared memories, and AI-based insights. The system provides a structured way to reflect on relationship health and enhance communication.
 
-- **Frontend:** HTML, CSS, JavaScript
-- **Backend:** Python (Flask, Flask-CORS)
+---
 
-## Getting Started
+## ✨ Features
 
-### Prerequisites
+* 📊 Relationship health surveys & scoring
+* 💬 Communication tracking system
+* 📅 Shared calendar and future planning
+* 🧠 AI-based relationship evaluation
+* 📝 Notes and shared memories
+* 👤 User profile and authentication (local storage)
+* 🔔 Notifications and feedback system
 
-- Python 3.8+
+---
 
-### Installation
+## 🛠️ Tech Stack
+
+* **Frontend:** HTML, CSS, JavaScript
+* **Backend:** Python (Flask, Flask-CORS)
+
+---
+
+## 🚀 Getting Started
+
+### 🔹 Prerequisites
+
+* Python 3.8+
+
+---
+
+### 🔹 Installation
 
 ```bash
-git clone https://github.com/rohitmichael-alt/webproject.git
-cd webproject
+git clone https://github.com/mandlikavnish/Relationship-manager-app.git
+cd Relationship-manager-app
 pip install -r requirements.txt
 ```
 
-### Running the Backend
+---
+
+### ▶️ Running the Backend
 
 ```bash
 python relationship_evaluator.py
 ```
 
-The Flask server will start at `http://localhost:5000`.
+Server will start at:
 
-### Running the Frontend
+```
+http://localhost:5000
+```
 
-Open `index.html` directly in your browser, or serve it with any static file server:
+---
+
+### 🌐 Running the Frontend
+
+Open `index.html` directly
+OR run:
 
 ```bash
-# Using Python's built-in server
 python -m http.server 8080
 ```
 
-Then visit `http://localhost:8080`.
-
-## Project Structure
+Then open:
 
 ```
-webproject/
+http://localhost:8080
+```
+
+---
+
+## 📁 Project Structure
+
+```
+Relationship-manager-app/
 ├── index.html              # Entry point
-├── homepage.html           # Main dashboard
+├── homepage.html           # Dashboard
 ├── relationship.html       # Relationship overview
-├── surveys.html            # Health survey
+├── surveys.html            # Health surveys
 ├── communication.html      # Communication tracker
 ├── memories.html           # Shared memories
-├── calendar.html           # Shared calendar
-├── plans.html              # Future plans
+├── calendar.html           # Calendar system
+├── plans.html              # Future planning
 ├── contacts.html           # Contact management
 ├── profile.html            # User profile
 ├── settings.html           # App settings
 ├── relationship_evaluator.py  # Flask backend
-├── requirements.txt        # Python dependencies
-└── renderer/               # JS and CSS assets
+├── requirements.txt        # Dependencies
+└── renderer/               # JS & CSS assets
 ```
 
-## GitHub
+---
 
-[https://github.com/rohitmichael-alt/webproject](https://github.com/rohitmichael-alt/webproject)
+## 🎥 Demo (Coming Soon)
+
+--
+
+---
+
+## 📌 GitHub Repository
+
+👉 https://github.com/mandlikavnish/Relationship-manager-app
+
+---
+
+## ⭐ Future Improvements
+
+* Database integration (MongoDB/MySQL)
+* User authentication with JWT
+* Improved UI with React
+* Deployment (Render / Vercel)
+
+---
+
+## 📄 License
+
+This project is for educational purposes.
